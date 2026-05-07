@@ -1,0 +1,102 @@
+openapi: 3.1.0
+info:
+  title: Partner Lead Distribution Engine
+  version: 1.0.0
+  description: >
+    Recruiter-ready API for partner lead routing, capacity-aware distribution,
+    attribution review, and SLA-conscious channel operations.
+servers:
+  - url: http://localhost:3000
+paths:
+  /health:
+    get:
+      summary: Service health status
+      responses:
+        '200':
+          description: Healthy service response
+  /api/leads:
+    get:
+      summary: List leads
+      responses:
+        '200':
+          description: Array of leads
+  /api/leads/{id}:
+    get:
+      summary: Get one lead
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Lead record
+        '404':
+          description: Lead not found
+  /api/partners:
+    get:
+      summary: List partners
+      responses:
+        '200':
+          description: Array of partner records
+  /api/territories:
+    get:
+      summary: List territories
+      responses:
+        '200':
+          description: Array of territory records
+  /api/routing-rules:
+    get:
+      summary: List routing rules
+      responses:
+        '200':
+          description: Array of routing rules
+  /api/distribution-events:
+    get:
+      summary: List distribution events
+      responses:
+        '200':
+          description: Array of distribution events
+  /api/dashboard/summary:
+    get:
+      summary: Dashboard summary
+      responses:
+        '200':
+          description: Aggregate channel operations summary
+  /api/analyze/routing:
+    post:
+      summary: Analyze routing decision
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Routing analysis
+  /api/analyze/capacity:
+    post:
+      summary: Analyze partner capacity posture
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Capacity analysis
+  /api/analyze/attribution:
+    post:
+      summary: Analyze attribution and routing confidence
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Attribution analysis
